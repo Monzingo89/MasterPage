@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './App.css'
 
 // Configuration object for subdomain URLs
@@ -19,12 +20,47 @@ const config = {
 const platforms = [
   {
     id: 1,
-    title: 'Platform 1',
-    description: 'Access the first service',
+    title: 'VAT - Video Automation TikTok',
+    description: 'Automated daily TikTok posts featuring historical "on this day" content',
+    progress: null,
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        <path d="M12 2v6"></path>
+        <path d="M12 18v4"></path>
+        <path d="m4.93 4.93 4.24 4.24"></path>
+        <path d="m14.83 14.83 4.24 4.24"></path>
+        <path d="M2 12h6"></path>
+        <path d="M18 12h4"></path>
+        <path d="m4.93 19.07 4.24-4.24"></path>
+        <path d="m14.83 9.17 4.24-4.24"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </svg>
+    )
+  },
+  {
+    id: 2,
+    title: 'VS - Video Sora',
+    description: 'Automated Sora-generated video clips for daily content creation',
+    progress: null,
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="23 7 16 12 23 17 23 7"></polygon>
+        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+      </svg>
+    )
+  },
+  {
+    id: 3,
+    title: 'GaaS - Grading as a Service',
+    description: 'AI-powered card grading with 360° imaging and PSA criteria analysis',
+    progress: 56,
+    isDemo: true,
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+        <path d="M12 18v-6"></path>
+        <path d="M9 15l3 3 3-3"></path>
       </svg>
     )
   },
@@ -124,9 +160,17 @@ const platforms = [
 
 function Card({ platform }) {
   const [isHovered, setIsHovered] = useState(false)
+  const navigate = useNavigate()
   const url = config.subdomains[platform.id]
 
   const handleClick = (e) => {
+    if (platform.id === 3) {
+      // GaaS demo page - navigate to detail page
+      e.preventDefault()
+      navigate('/gaas-demo')
+      return
+    }
+    
     if (!url || url.includes('example.com')) {
       e.preventDefault()
       alert(`Please configure the URL for ${platform.title} in App.jsx`)
@@ -148,6 +192,20 @@ function Card({ platform }) {
       </div>
       <h2 className="card-title">{platform.title}</h2>
       <p className="card-description">{platform.description}</p>
+      
+      {platform.progress !== null && (
+        <div className="progress-container">
+          <div className="progress-bar">
+            <div className="progress-fill" style={{ width: `${platform.progress}%` }}></div>
+          </div>
+          <span className="progress-text">{platform.progress}% Complete</span>
+        </div>
+      )}
+      
+      {platform.isDemo && (
+        <span className="demo-badge">Sunday Demo</span>
+      )}
+      
       <span className="card-arrow">→</span>
     </a>
   )
