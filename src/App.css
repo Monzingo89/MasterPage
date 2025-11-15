@@ -307,3 +307,25 @@ body {
       transition-duration: 0.01ms !important;
   }
 }
+
+/* Highlight the capture tile that is currently active for uploading */
+@keyframes uploadPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(124, 58, 237, 0);
+  }
+  50% {
+    box-shadow: 0 0 18px 6px rgba(124, 58, 237, 0.14);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(124, 58, 237, 0);
+  }
+}
+
+.capture-tile {
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.capture-tile.upload-flash {
+  border-color: var(--primary-color) !important;
+  animation: uploadPulse 1.2s ease-in-out infinite;
+}

@@ -158,12 +158,12 @@ const platforms = [
   }
 ]
 
-function Card({ platform }) {
+function Card({ platform }: { platform: any }) {
   const [isHovered, setIsHovered] = useState(false)
   const navigate = useNavigate()
-  const url = config.subdomains[platform.id]
+  const url = config.subdomains[platform.id as keyof typeof config.subdomains]
 
-  const handleClick = (e) => {
+  const handleClick = (e: { preventDefault: () => void }) => {
     if (platform.id === 3) {
       // GaaS demo page - navigate to detail page
       e.preventDefault()
