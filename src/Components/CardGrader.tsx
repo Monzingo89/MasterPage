@@ -197,10 +197,27 @@ export const CardGrader: React.FC = () => {
         {currentStep !== "review" && currentStepConfig.slot && (
           <>
             <p style={{ color: "#111827", fontSize: "0.9rem" }}>
-                  Place the card on a flat, non-glossy surface. Use the <strong>Use camera</strong> button to
-                  capture directly from your device, or the <strong>Choose file</strong> button to upload an
-                  existing photo. On mobile, the <strong>Use camera</strong> option opens the rear camera.
-                </p>
+              {activeUploadSlot === "front_top" && (
+                <>
+                  Place the card on a flat, non-glossy surface. Hold your phone <strong>parallel to the card</strong> in a top-down position, ensuring the entire card is visible and in focus. Use the <strong>Use camera</strong> button to capture directly, or the <strong>Choose file</strong> button to upload an existing photo.
+                </>
+              )}
+              {activeUploadSlot === "back_top" && (
+                <>
+                  Flip the card over to show the back. Keep the same <strong>top-down angle and framing</strong> as the front photo. Ensure the card is flat and the entire back is visible. Use the <strong>Use camera</strong> button to capture directly, or the <strong>Choose file</strong> button to upload an existing photo.
+                </>
+              )}
+              {activeUploadSlot === "front_angle" && (
+                <>
+                  Tilt your phone to a <strong>20-30° angle</strong> to capture the card's surface details and depth. Focus on corners and edges to show any wear or imperfections. Use the <strong>Use camera</strong> button to capture directly, or the <strong>Choose file</strong> button to upload an existing photo.
+                </>
+              )}
+              {!activeUploadSlot && (
+                <>
+                  Click on any card slot above to begin uploading. Use the <strong>Use camera</strong> button to capture directly from your device, or the <strong>Choose file</strong> button to upload an existing photo. On mobile, the <strong>Use camera</strong> option opens the rear camera.
+                </>
+              )}
+            </p>
             {/* Two hidden inputs + visible buttons: Choose file (picker) and Use camera (capture) */}
             <input
               id={`file-input-${currentStepConfig.slot}-choose`}
