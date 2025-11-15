@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/virtualcommerceventures/MasterPage.git"
+    "url": "git+https://github.com/Monzingo89/MasterPage.git"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/virtualcommerceventures/MasterPage/issues"
   },
-  "homepage": "https://virtualcommerceventures.github.io/MasterPage",
+  "homepage": "https://monzingo89.github.io/MasterPage",
   "dependencies": {
     "@vitejs/plugin-react": "^5.1.0",
     "react": "^19.2.0",
